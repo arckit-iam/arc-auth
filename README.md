@@ -2,7 +2,7 @@
 
 Service d'authentification de la plateforme InstantAccessProvider : vérifie l'identité d'un utilisateur dans un annuaire LDAP (bind) et émet un jeton d'accès JWT signé, que les services ARC valident.
 
-> **Statut : version 0.1.** Émission de jetons et publication des clés (JWKS). La protection d'`arc-publisher` et de `product-manager` est décrite dans [arc-docs, document 13](https://github.com/arckit-iam/arc-docs/blob/main/docs/13-authentification-jwt.md).
+> **Statut : version 0.1, validée sur Apache DS.** Émission de jetons et publication des clés (JWKS). `arc-publisher` et `product-manager` valident ces jetons ; voir [arc-docs, document 13](https://github.com/arckit-iam/arc-docs/blob/main/docs/13-authentification-jwt.md).
 
 ## But
 
