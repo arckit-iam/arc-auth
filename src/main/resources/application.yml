@@ -1,0 +1,41 @@
+server:
+  port: ${SERVER_PORT:8082}
+
+spring:
+  application:
+    name: arc-auth
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health
+
+arc:
+  auth:
+    ldap:
+      url: ${ARC_AUTH_LDAP_URL:ldap://localhost:10389}
+      manager-dn: ${ARC_AUTH_LDAP_MANAGER_DN:}
+      manager-password: ${ARC_AUTH_LDAP_MANAGER_PASSWORD:}
+      user-search-base: ${ARC_AUTH_LDAP_USER_SEARCH_BASE:ou=Users,dc=example,dc=com}
+      user-search-filter: ${ARC_AUTH_LDAP_USER_SEARCH_FILTER:(uid={0})}
+      group-search-base: ${ARC_AUTH_LDAP_GROUP_SEARCH_BASE:ou=Groups,dc=example,dc=com}
+    jwt:
+      # Obligatoire : aucune valeur par défaut.
+      issuer: ${ARC_AUTH_JWT_ISSUER}
+      audience: ${ARC_AUTH_JWT_AUDIENCE:arc}
+      ttl: ${ARC_AUTH_JWT_TTL:PT15M}
+      # Vide : clé éphémère générée au démarrage (démonstration seulement).
+      private-key-path: ${ARC_AUTH_JWT_PRIVATE_KEY_PATH:}
+      # Vide : empreinte SHA-256 de la clé publique.
+      key-id: ${ARC_AUTH_JWT_KEY_ID:}
+      # Clés publiques PEM supplémentaires (séparées par des virgules), publiées le temps d'une rotation.
+      additional-public-key-paths: ${ARC_AUTH_JWT_ADDITIONAL_PUBLIC_KEY_PATHS:}
+    roles:
+      admin-group: ${ARC_AUTH_ROLE_ADMIN_GROUP:arc-admins}
+      publisher-group: ${ARC_AUTH_ROLE_PUBLISHER_GROUP:arc-publishers}
+      reader-group: ${ARC_AUTH_ROLE_READER_GROUP:arc-readers}
+    rate-limit:
+      max-failures-per-address: ${ARC_AUTH_RATE_LIMIT_MAX_FAILURES_PER_ADDRESS:20}
+      max-failures-per-identifier: ${ARC_AUTH_RATE_LIMIT_MAX_FAILURES_PER_IDENTIFIER:5}
+      window: ${ARC_AUTH_RATE_LIMIT_WINDOW:PT5M}

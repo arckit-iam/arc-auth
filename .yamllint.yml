@@ -1,0 +1,11 @@
+---
+extends: default
+
+rules:
+  document-start: enable
+  braces:
+    min-spaces-inside: 0
+    max-spaces-inside: 1
+
+ignore: |
+  k8s/templates/
